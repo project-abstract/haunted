@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Resources/Tiles/floortile.png" type="Texture" id=1]
 [ext_resource path="res://Resources/Prot/girl_run_2.png" type="Texture" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://Resources/Fonts/GeosansLight.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://Resources/Objects/light_u.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/bhost.gd" type="Script" id=10]
+[ext_resource path="res://Resources/Prot/bhost.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Objects/pickup.png" type="Texture" id=12]
 
 [sub_resource type="TileSet" id=1]
 0/name = "floortile.png 0"
@@ -109,7 +111,6 @@ outlines = [ PoolVector2Array( -664, -824, -656, -712, -160, -696, -160, -448, -
 script = ExtResource( 3 )
 
 [node name="ambientlight" type="CanvasModulate" parent="."]
-visible = false
 color = Color( 0, 0, 0, 1 )
 
 [node name="floor" type="TileMap" parent="."]
@@ -176,16 +177,26 @@ normal = ExtResource( 5 )
 action = "ui_right"
 visibility_mode = 1
 
+[node name="pickup" type="TouchScreenButton" parent="body"]
+modulate = Color( 0.458824, 0.415686, 0.415686, 1 )
+material = SubResource( 7 )
+position = Vector2( 121.333, -405.333 )
+scale = Vector2( 1.3, 1.3 )
+z_index = 1
+normal = ExtResource( 12 )
+action = "ui_return"
+visibility_mode = 1
+
 [node name="fps_label" type="Node2D" parent="body"]
 position = Vector2( -1324, -1306.67 )
 scale = Vector2( 0.666667, 0.666667 )
 z_index = 3
 
 [node name="fps" type="Label" parent="body/fps_label"]
-margin_left = 1393.28
-margin_top = 945.949
-margin_right = 1463.28
-margin_bottom = 981.949
+margin_left = 1393.0
+margin_top = 946.0
+margin_right = 2320.0
+margin_bottom = 982.0
 custom_fonts/font = SubResource( 8 )
 text = "FPS: "
 __meta__ = {
@@ -193,10 +204,9 @@ __meta__ = {
 }
 
 [node name="light2" type="Light2D" parent="body/fps_label/fps"]
-position = Vector2( 50.0557, 9.68271 )
-scale = Vector2( 3.80056, 2.10375 )
+position = Vector2( 422.999, 9.68271 )
+scale = Vector2( 47.75, 2.10375 )
 texture = ExtResource( 9 )
-mode = 2
 range_z_min = 3
 range_z_max = 3
 
@@ -209,9 +219,6 @@ hframes = 4
 [node name="light" type="Light2D" parent="body/prota"]
 position = Vector2( 2.69791, 3.33109 )
 texture = ExtResource( 4 )
-color = Color( 0.141176, 0.890196, 0.968627, 1 )
-energy = 0.7
-mode = 2
 shadow_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="body/prota"]
@@ -228,15 +235,47 @@ position = Vector2( 496, -112 )
 script = ExtResource( 10 )
 
 [node name="villian" type="Sprite" parent="Navigation2D/bhost"]
-modulate = Color( 0.227451, 0.152941, 0.858824, 1 )
-scale = Vector2( 1.5, 1.5 )
-texture = SubResource( 9 )
-vframes = 4
-hframes = 4
+z_index = 2
+texture = ExtResource( 11 )
+vframes = 2
+hframes = 8
 
 [node name="light" type="Light2D" parent="Navigation2D/bhost/villian"]
 position = Vector2( 2.69791, 3.33109 )
 texture = ExtResource( 4 )
-color = Color( 0.517647, 0.0470588, 0.0470588, 1 )
+color = Color( 0.921569, 0.329412, 0.329412, 1 )
 range_height = 124.1
+range_z_min = 2
+range_z_max = 2
 shadow_enabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -672, 768, -264, 768, -264, 1280, -672, 1280 )
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D2"]
+position = Vector2( -8, -1408 )
+polygon = PoolVector2Array( -664, 768, -184, 768, -184, 952, -664, 960 )
+
+[node name="Area2D3" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D3"]
+position = Vector2( 1528, -1592 )
+polygon = PoolVector2Array( -664, 760, 392, 760, 392, 888, -664, 888 )
+
+[node name="Area2D4" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D4"]
+position = Vector2( 2040, 8 )
+polygon = PoolVector2Array( -688, 696, -128, 688, -120, 1272, -688, 1272 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
+[connection signal="body_entered" from="Area2D2" to="." method="_on_Area2D2_body_entered"]
+[connection signal="body_exited" from="Area2D2" to="." method="_on_Area2D2_body_exited"]
+[connection signal="body_entered" from="Area2D3" to="." method="_on_Area2D3_body_entered"]
+[connection signal="body_exited" from="Area2D3" to="." method="_on_Area2D3_body_exited"]
+[connection signal="body_entered" from="Area2D4" to="." method="_on_Area2D4_body_entered"]
+[connection signal="body_exited" from="Area2D4" to="." method="_on_Area2D4_body_exited"]

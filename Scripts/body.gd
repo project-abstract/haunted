@@ -5,8 +5,10 @@ onready var light = $'prota/light'
 onready var ground = $"floor"
 onready var frame_coordinates = Vector2(0, 0)
 onready var previous_direction = 'd'
+
 var frame_x = 0
 var frame_y = 0
+var temp = 0
 var time_elapsed = 0
 
 func _ready():
@@ -53,9 +55,10 @@ func _physics_process(delta):
 
 func check_direction(dir):
 	if previous_direction == dir:
-		frame_x += 1
+		temp += 1
 	else:
 		frame_x = 0
 		previous_direction = dir
-	if frame_x > 4:
-		frame_x = 0
+	if temp > 3:
+		temp = 0
+	frame_x = temp
