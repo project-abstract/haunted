@@ -5,7 +5,16 @@ onready var nav_2d = $"Navigation2D"
 onready var villian = $"Navigation2D/bhost"
 onready var prota = $"body/prota"
 var next_position = Vector2()
+export var circlepad = false
 onready var hidden = false
+
+func _ready():
+	if circlepad:
+		$"body/controls/dpad".visible = false
+		$"body/controls/circlepad".visible = true
+	else:
+		$"body/controls/dpad".visible = true
+		$"body/controls/circlepad".visible = false
 
 func _process(delta):
 	fps.text = "FPS: " + str(Engine.get_frames_per_second())
@@ -22,7 +31,7 @@ func _process(delta):
 	else:
 		$"Navigation2D/bhost".chasing = false
 		next_position = Vector2(0, 0)
-	if distance_diff < 70.0:
+	if distance_diff < 60.0:
 		fps.text = "You suck at this play again with FPS: " + str(Engine.get_frames_per_second())
 	
 	villian.path = new_path

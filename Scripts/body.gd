@@ -16,38 +16,61 @@ func _ready():
 
 func _physics_process(delta):
 	var speed = 300
+	var velocity = Vector2(0, 0)
 	if time_elapsed >= speed/600*delta:
 		time_elapsed = 0
-		if Input.is_action_pressed("ui_up"):
-			frame_y = 3
-			check_direction('u')
-			previous_direction = 'u'
-			move_and_collide(Vector2(0, -speed*delta))
-			#light.position = Vector2(0, -20)
-			
-		elif Input.is_action_pressed("ui_down"):
-			frame_y = 0
-			check_direction('d')
-			previous_direction = 'd'
-			move_and_collide(Vector2(0, speed*delta))
-			#light.position = Vector2(0, 20)
-			
-		elif Input.is_action_pressed("ui_left"):
-			frame_y = 1
-			check_direction('l')
-			previous_direction = 'l'
-			move_and_collide(Vector2(-speed*delta, 0))
-			#light.position = Vector2(-20, 0)
-			
-		elif Input.is_action_pressed("ui_right"):
-			frame_y = 2
-			check_direction('r')
-			previous_direction = 'r'
-			move_and_collide(Vector2(speed*delta, 0))
-			#light.position = Vector2(20, 0)
-			
+		if get_parent().circlepad:
+			var velocity_temp = $"controls/circlepad/joystick_button".get_value()*100
+			if velocity_temp.x >= 45:
+				frame_y = 2
+				check_direction('r')
+				previous_direction = 'r'
+				velocity = Vector2(speed*delta, 0)
+			elif velocity_temp.x <= -80:
+				frame_y = 1
+				check_direction('l')
+				previous_direction = 'l'
+				velocity = Vector2(-speed*delta, 0)
+			elif velocity_temp.y <= -85:
+				frame_y = 3
+				check_direction('u')
+				previous_direction = 'u'
+				velocity = Vector2(0, -speed*delta)
+			elif velocity_temp.y >= 40:
+				frame_y = 0
+				check_direction('d')
+				previous_direction = 'd'
+				velocity = Vector2(0, speed*delta)
+			else:
+				velocity = Vector2(0, 0)
 		else:
-			frame_x = 0
+			if Input.is_action_pressed("ui_up"):
+				frame_y = 3
+				check_direction('u')
+				previous_direction = 'u'
+				velocity = Vector2(0, -speed*delta)
+				
+			elif Input.is_action_pressed("ui_down"):
+				frame_y = 0
+				check_direction('d')
+				previous_direction = 'd'
+				velocity = Vector2(0, speed*delta)
+				
+			elif Input.is_action_pressed("ui_left"):
+				frame_y = 1
+				check_direction('l')
+				previous_direction = 'l'
+				velocity = Vector2(-speed*delta, 0)
+				
+			elif Input.is_action_pressed("ui_right"):
+				frame_y = 2
+				check_direction('r')
+				previous_direction = 'r'
+				velocity = Vector2(speed*delta, 0)
+				
+			else:
+				frame_x = 0
+		move_and_collide(velocity)
 		frame_coordinates = Vector2(frame_x, frame_y)
 		prota.frame_coords = frame_coordinates
 	else:
