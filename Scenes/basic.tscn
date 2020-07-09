@@ -1,7 +1,7 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Resources/Tiles/floortile.png" type="Texture" id=1]
-[ext_resource path="res://Resources/Prot/girl_run_2.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Prot/hero_1.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/basic.gd" type="Script" id=3]
 [ext_resource path="res://Resources/Objects/light.png" type="Texture" id=4]
 [ext_resource path="res://Resources/Objects/arrow.png" type="Texture" id=5]
@@ -11,7 +11,6 @@
 [ext_resource path="res://Scripts/bhost.gd" type="Script" id=10]
 [ext_resource path="res://Resources/Prot/bhost.png" type="Texture" id=11]
 [ext_resource path="res://Resources/Objects/pickup.png" type="Texture" id=12]
-[ext_resource path="res://Resources/Objects/joystick_base.png" type="Texture" id=13]
 [ext_resource path="res://Resources/Objects/joystick_touch_unpressed.png" type="Texture" id=14]
 [ext_resource path="res://Resources/Objects/joystick_touch.png" type="Texture" id=15]
 [ext_resource path="res://Scripts/circlepad.gd" type="Script" id=16]
@@ -93,9 +92,6 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 [sub_resource type="CanvasItemMaterial" id=7]
 light_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id=8]
-light_mode = 1
-
 [sub_resource type="CanvasItemMaterial" id=9]
 light_mode = 1
 
@@ -113,11 +109,7 @@ use_filter = true
 extra_spacing_char = 2
 font_data = ExtResource( 8 )
 
-[sub_resource type="AnimatedTexture" id=13]
-flags = 4
-frame_0/texture = ExtResource( 2 )
-
-[sub_resource type="NavigationPolygon" id=14]
+[sub_resource type="NavigationPolygon" id=13]
 vertices = PoolVector2Array( -656, -712, -664, -824, 824, -832, 808, -704, -160, -696, 1336, 696, 1328, 1272, -264, 1272, -264, 704, -160, -448, -648, 704, -664, -440, 1912, -696, 1912, 688 )
 polygons = [ PoolIntArray( 0, 1, 2, 3, 4 ), PoolIntArray( 5, 6, 7, 8, 9, 3 ), PoolIntArray( 10, 11, 9, 8 ), PoolIntArray( 3, 12, 13, 5 ), PoolIntArray( 4, 3, 9 ) ]
 outlines = [ PoolVector2Array( -664, -824, -656, -712, -160, -696, -160, -448, -664, -440, -648, 704, -264, 704, -264, 1272, 1328, 1272, 1336, 696, 1912, 688, 1912, -696, 808, -704, 824, -832 ) ]
@@ -147,7 +139,7 @@ script = ExtResource( 6 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="body"]
 position = Vector2( -102.667, -501.333 )
-polygon = PoolVector2Array( -12.6879, -19.9302, 13.2966, -19.4847, 12.5542, 16.4482, -13.5788, 17.1906 )
+polygon = PoolVector2Array( -9.33299, -16.0004, 12.0003, -16.0004, 12.0003, 21.333, -9.33299, 21.333 )
 
 [node name="controls" type="Node2D" parent="body"]
 z_index = 1
@@ -204,14 +196,9 @@ action = "ui_return"
 visibility_mode = 1
 
 [node name="circlepad" type="Node2D" parent="body/controls"]
+visible = false
 position = Vector2( -432, -688 )
 scale = Vector2( 0.666667, 0.666667 )
-
-[node name="joystick_base" type="Sprite" parent="body/controls/circlepad"]
-material = SubResource( 8 )
-position = Vector2( 152, 450 )
-scale = Vector2( 4, 4 )
-texture = ExtResource( 13 )
 
 [node name="joystick_button" type="TouchScreenButton" parent="body/controls/circlepad"]
 material = SubResource( 9 )
@@ -222,6 +209,15 @@ pressed = ExtResource( 15 )
 shape = SubResource( 10 )
 visibility_mode = 1
 script = ExtResource( 16 )
+
+[node name="pickup" type="TouchScreenButton" parent="body/controls/circlepad"]
+modulate = Color( 0.458824, 0.415686, 0.415686, 1 )
+material = SubResource( 7 )
+position = Vector2( 829.999, 424 )
+scale = Vector2( 1.95, 1.95 )
+normal = ExtResource( 12 )
+action = "ui_return"
+visibility_mode = 1
 
 [node name="fps_label" type="Node2D" parent="body"]
 position = Vector2( -1324, -1306.67 )
@@ -242,13 +238,15 @@ __meta__ = {
 
 [node name="prota" type="Sprite" parent="body"]
 position = Vector2( -102.667, -501.333 )
-texture = SubResource( 13 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
 vframes = 4
-hframes = 4
+hframes = 20
 
 [node name="light" type="Light2D" parent="body/prota"]
 position = Vector2( 2.69791, 3.33109 )
 texture = ExtResource( 4 )
+energy = 0.8
 shadow_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="body/prota"]
@@ -258,7 +256,7 @@ current = true
 [node name="Navigation2D" type="Navigation2D" parent="."]
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="Navigation2D"]
-navpoly = SubResource( 14 )
+navpoly = SubResource( 13 )
 
 [node name="bhost" type="Node2D" parent="Navigation2D"]
 position = Vector2( 496, -112 )
