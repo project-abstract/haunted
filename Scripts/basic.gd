@@ -5,11 +5,11 @@ onready var nav_2d = $"Navigation2D"
 onready var villian = $"Navigation2D/bhost"
 onready var prota = $"body/prota"
 var next_position = Vector2()
-export var circlepad = false
 onready var hidden = false
+onready var pressed = true
 
 func _ready():
-	if circlepad:
+	if Global.cpad:
 		$"body/controls/dpad".visible = false
 		$"body/controls/circlepad".visible = true
 	else:
@@ -75,3 +75,10 @@ func _on_Area2D4_body_entered(body):
 func _on_Area2D4_body_exited(body):
 	if body is KinematicBody2D:
 		hidden = false
+
+
+func _on_back_pressed():
+	get_tree().change_scene("res://Scenes/menu.tscn")
+
+
+

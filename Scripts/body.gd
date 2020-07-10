@@ -23,7 +23,7 @@ func _physics_process(delta):
 	if time_elapsed >= speed/600*delta:
 		time_elapsed = 0
 		idle = false
-		if get_parent().circlepad:
+		if Global.cpad:
 			var velocity_temp = $"controls/circlepad/joystick_button".get_value()*100
 			if velocity_temp.x >= 45:
 				frame_y = 1
