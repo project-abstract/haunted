@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/circlepad.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Objects/joystick_touch.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Objects/joystick_touch_unpressed.png" type="Texture" id=3]
+[ext_resource path="res://Resources/Objects/joystick_base.png" type="Texture" id=4]
+
+[sub_resource type="CanvasItemMaterial" id=4]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=1]
+light_mode = 1
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 16.0
+
+[node name="circlepad" type="Node2D"]
+position = Vector2( -432, -700 )
+scale = Vector2( 0.666667, 0.666667 )
+
+[node name="joystick_base" type="Sprite" parent="."]
+material = SubResource( 4 )
+position = Vector2( 152, 448 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 4 )
+
+[node name="joystick_button" type="TouchScreenButton" parent="."]
+material = SubResource( 1 )
+position = Vector2( 88, 386 )
+scale = Vector2( 4, 4 )
+normal = ExtResource( 3 )
+pressed = ExtResource( 2 )
+shape = SubResource( 2 )
+visibility_mode = 1
+script = ExtResource( 1 )

@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Resources/Objects/arrow.png" type="Texture" id=1]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+light_mode = 1
+
+[node name="dpad" type="Node2D"]
+
+[node name="up" type="TouchScreenButton" parent="."]
+modulate = Color( 0.458824, 0.415686, 0.415686, 1 )
+material = SubResource( 1 )
+position = Vector2( -376.44, -444.457 )
+scale = Vector2( 0.133333, 0.133333 )
+normal = ExtResource( 1 )
+action = "ui_up"
+visibility_mode = 1
+
+[node name="down" type="TouchScreenButton" parent="."]
+modulate = Color( 0.458824, 0.415686, 0.415686, 1 )
+material = SubResource( 1 )
+position = Vector2( -309.773, -311.124 )
+rotation = 3.14159
+scale = Vector2( 0.133333, 0.133333 )
+normal = ExtResource( 1 )
+action = "ui_down"
+visibility_mode = 1
+
+[node name="left" type="TouchScreenButton" parent="."]
+modulate = Color( 0.458824, 0.415686, 0.415686, 1 )
+material = SubResource( 1 )
+position = Vector2( -409.773, -344.457 )
+rotation = -1.5708
+scale = Vector2( 0.133333, 0.133333 )
+normal = ExtResource( 1 )
+action = "ui_left"
+visibility_mode = 1
+
+[node name="right" type="TouchScreenButton" parent="."]
+modulate = Color( 0.458824, 0.415686, 0.415686, 1 )
+material = SubResource( 1 )
+position = Vector2( -276.44, -411.124 )
+rotation = 1.5708
+scale = Vector2( 0.133333, 0.133333 )
+normal = ExtResource( 1 )
+action = "ui_right"
+visibility_mode = 1

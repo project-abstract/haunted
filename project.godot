@@ -16,9 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="haunted"
-run/main_scene="res://Scenes/basic.tscn"
-run/low_processor_mode=true
+run/main_scene="res://Scenes/menu.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Global="*res://Scripts/global.gd"
 
 [display]
 
@@ -26,5 +29,5 @@ window/stretch/mode="viewport"
 
 [rendering]
 
-environment/default_clear_color=Color( 0, 0, 0, 1 )
+environment/default_clear_color=Color( 0.160784, 0.184314, 0.231373, 1 )
 environment/default_environment="res://default_env.tres"
