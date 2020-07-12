@@ -3,8 +3,8 @@ extends Control
 
 func _ready():
 	if !OS.has_virtual_keyboard():
-		$"controller_settings/cpad".disabled = true 
-		$"controller_settings/dpad".disabled = true
+		$"controller_settings/cpad".disabled = false 
+		$"controller_settings/dpad".disabled = false
 	else:
 		$"controller_settings/cpad".disabled = false 
 		$"controller_settings/dpad".disabled = false

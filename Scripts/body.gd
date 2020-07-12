@@ -3,6 +3,7 @@ extends KinematicBody2D
 onready var prota = $"prota"
 onready var light = $'prota/light'
 onready var ground = $"floor"
+onready var hp_tween = $"hp_tween"
 onready var frame_coordinates = Vector2(0, 0)
 onready var previous_direction = 'd'
 
@@ -47,6 +48,7 @@ func _physics_process(delta):
 				velocity = Vector2(0, speed*delta)
 			else:
 				velocity = Vector2(0, 0)
+				frame_x = 0
 				idle = true
 		else:
 			if Input.is_action_pressed("ui_up"):
@@ -104,3 +106,8 @@ func check_direction(dir, delta):
 			$"prota/light".energy = 60*delta
 	else:
 		another_time_elapsed += delta
+
+func update_health():
+	var health_bar = $"HP_tween_bar"
+	hp_tween.interpolate_property(health_bar, "value", health_bar.value, Global.HP, 1, Tween.TRANS_SINE, Tween.EASE_IN)
+	hp_tween.start()

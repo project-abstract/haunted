@@ -1,10 +1,15 @@
 extends Node2D
 
 var speed = 150.0
+var damage = 10
 var path : = PoolVector2Array() setget set_path
 var time_d = 0
 var frame_coords = 0
 export var chasing = false
+var next_position = Vector2(0,0)
+var distance_from_prot = 0
+var damaging = false
+var initial_position = Vector2(496, -112)
 
 func _ready():
 	set_process(false)
