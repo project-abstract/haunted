@@ -14,6 +14,7 @@ var idle = true
 var time_elapsed = 0
 var another_time_elapsed = 0
 var light_flicker = 0
+var feri_time_elapsed = 0
 
 func _ready():
 	pass # Replace with function body.
@@ -21,6 +22,7 @@ func _ready():
 func _physics_process(delta):
 	var speed = 600
 	var velocity = Vector2(0, 0)
+	
 	if time_elapsed >= speed/600*delta:
 		time_elapsed = 0
 		idle = false
@@ -81,6 +83,31 @@ func _physics_process(delta):
 		prota.frame_coords = frame_coordinates
 	else:
 		time_elapsed += delta
+	check_for_throw(delta)
+	check_collection()
+
+func check_for_throw(delta):
+	if feri_time_elapsed >= 3* delta:
+		feri_time_elapsed = 0
+		if (Input.is_key_pressed(KEY_C) or Input.is_action_pressed("ui_home")) and Global.items_collected.size() > 0 and get_parent().check_if_one_is_chasing():
+			var thrown_item = get_parent().get_node(Global.realname(Global.items_collected[0])+"/"+Global.realname(Global.items_collected[0]))
+			thrown_item.get_parent().position = self.position
+			thrown_item.visible = true
+			Global.throw_item()
+			get_parent().start_distraction(thrown_item.global_position, thrown_item.distraction_time)
+	else:
+		feri_time_elapsed += delta
+
+func check_collection():
+	get_node("collected_item/Sprite1").visible = false
+	get_node("collected_item/Sprite2").visible = false
+	get_node("collected_item/Sprite3").visible = false
+	get_node("collected_item/Sprite4").visible = false
+	get_node("collected_item/Sprite5").visible = false
+	var show_no = Global.items_collected.size()
+	for i in range(show_no):
+		get_node("collected_item/Sprite"+str(i+1)).texture = load(Global.getname(Global.items_collected[i]))
+		get_node("collected_item/Sprite"+str(i+1)).visible = true
 
 func check_direction(dir, delta):
 	if another_time_elapsed >= 3 * delta:

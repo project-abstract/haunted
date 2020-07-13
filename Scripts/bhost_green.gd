@@ -2,6 +2,9 @@ extends Node2D
 
 var speed = 100.0
 var damage = 25
+var visibility = 10000
+var distracted = false
+
 var path : = PoolVector2Array() setget set_path
 var time_d = 0
 var frame_coords = 0
@@ -10,6 +13,8 @@ var next_position = Vector2(2216, -544)
 var distance_from_prot = 0
 var damaging = false
 var initial_position = Vector2(2216, -544)
+var distract_location = Vector2(0, 0)
+var time_distracted = 0
 
 func _ready():
 	set_process(false)
@@ -18,6 +23,23 @@ func _process(delta):
 	var move_distance = speed * delta
 	move_along_path(move_distance)
 	animate_villian(delta)
+	be_distracted(delta)
+
+func check_prota():
+	var collisions = str(get_parent().get_parent().get_node("Area2D3").get_overlapping_bodies())
+	if "KinematicBody2D" in collisions:
+		chasing = true
+	else:
+		chasing = false
+
+func be_distracted(delta):
+	if distracted == true:
+		chasing = false
+		next_position = distract_location
+		time_distracted += delta
+	if time_distracted >= Global.time_for_3:
+		distracted = false
+		time_distracted = 0
 
 func move_along_path(distance: float):
 	var start_point = position

@@ -9,13 +9,26 @@ onready var pressed = true
 onready var time_again = 0
 
 func _ready():
-	Global.HP = 100
+	Global.hp_max = 100
+	Global.HP = Global.hp_max
+	$"body/HP_rapid".max_value = Global.hp_max
+	$"body/HP_tween_bar".max_value = Global.hp_max
+	$"body/HP_rapid".value = Global.HP
+	$"body/HP_tween_bar".value = Global.HP
+	
 	$"body/environment".play()
 	$"exit_sign1/Light2D/AnimationPlayer".play("light_blink")
 	$"exit_sign2/Light2D/AnimationPlayer".play("light_blink")
-	$"Light2D/AnimationPlayer".play("light_blink")
-	$"Light2D2/AnimationPlayer".play("light_blink")
-	$"Light2D3/AnimationPlayer".play("light_blink")
+	$"bulb_safe/Light2D/AnimationPlayer".play("light_blink")
+	$"bulb_safe2/Light2D2/AnimationPlayer".play("light_blink")
+	$"bulb_danger/Light2D3/AnimationPlayer".play("light_blink")
+	
+	$"health_boost/sprite1/Light2D/AnimationPlayer".play("light_blink")
+	$"health_boost/sprite2/Light2D/AnimationPlayer".play("light_blink")
+	$"health_boost/sprite3/Light2D/AnimationPlayer".play("light_blink")
+	$"health_boost/sprite4/Light2D/AnimationPlayer".play("light_blink")
+	$"health_boost/sprite5/Light2D/AnimationPlayer".play("light_blink")
+	
 	if Global.cpad:
 		$"body/controls/dpad".visible = false
 		$"body/controls/circlepad".visible = true
@@ -29,6 +42,9 @@ func _process(delta):
 	var new_path = nav_2d.get_simple_path($"Navigation2D/bhost".global_position, $"Navigation2D/bhost".next_position)
 	var new_path2 = nav_2d2.get_simple_path($"Navigation2D2/bhost".global_position, $"Navigation2D2/bhost".next_position)
 	var new_path3 = nav_2d3.get_simple_path($"Navigation2D3/bhost".global_position, $"Navigation2D3/bhost".next_position)
+	$"Navigation2D/bhost".check_prota()
+	$"Navigation2D2/bhost".check_prota()
+	$"Navigation2D3/bhost".check_prota()
 	check_chasing($"Navigation2D/bhost")
 	check_chasing($"Navigation2D2/bhost")
 	check_chasing($"Navigation2D3/bhost")
@@ -39,15 +55,39 @@ func _process(delta):
 	$"Navigation2D2/bhost".path = new_path2
 	$"Navigation2D3/bhost".path = new_path3
 	change_music()
+
+func check_if_one_is_chasing():
+	if $"Navigation2D/bhost".next_position != $"Navigation2D/bhost".initial_position:
+		return true
+	elif $"Navigation2D2/bhost".next_position != $"Navigation2D2/bhost".initial_position:
+		return true
+	elif $"Navigation2D3/bhost".next_position != $"Navigation2D3/bhost".initial_position:
+		return true
+	else:
+		return false
 	
+func start_distraction(location, item_time):
+	if $"Navigation2D/bhost".next_position != $"Navigation2D/bhost".initial_position:
+		Global.time_for_1 = item_time
+		$"Navigation2D/bhost".distract_location = location
+		$"Navigation2D/bhost".distracted = true
+	elif $"Navigation2D2/bhost".next_position != $"Navigation2D2/bhost".initial_position:
+		Global.time_for_2 = item_time
+		$"Navigation2D2/bhost".distract_location = location
+		$"Navigation2D2/bhost".distracted = true
+	elif $"Navigation2D3/bhost".next_position != $"Navigation2D3/bhost".initial_position:
+		Global.time_for_3 = item_time
+		$"Navigation2D3/bhost".distract_location = location
+		$"Navigation2D3/bhost".distracted = true
+
 func change_music():
 	var ghost1 = $"Navigation2D/bhost"
 	var ghost2 = $"Navigation2D2/bhost"
-	var ghost3 = $"Navigation2D/bhost"
-	if (ghost1.next_position == ghost1.initial_position) and (ghost2.next_position == ghost2.initial_position) and (ghost3.next_position == ghost3.initial_position): 
-		$"body/environment".pitch_scale = 1
-	else:
+	var ghost3 = $"Navigation2D3/bhost"
+	if (ghost1.next_position != ghost1.initial_position) or (ghost2.next_position != ghost2.initial_position) or (ghost3.next_position != ghost3.initial_position): 
 		$"body/environment".pitch_scale = 1.25
+	else:
+		$"body/environment".pitch_scale = 1
 
 func reduce_HP(delta, ghost):
 	if ghost.damaging == true:
@@ -60,7 +100,7 @@ func reduce_HP(delta, ghost):
 			time_again += delta
 	if Global.HP <= 0:
 		fps.text = "Health Over :'( FPS: " + str(Engine.get_frames_per_second())
-		#get_tree().change_scene("res://Scenes/menu.tscn")
+		dead()
 
 func check_chasing(ghost):
 	if ghost.chasing == true:
@@ -74,40 +114,34 @@ func check_distance(ghost):
 	var y_diff = abs(ghost.global_position.y-prota.global_position.y)
 	var distance_diff = sqrt(x_diff*x_diff + y_diff*y_diff)
 	ghost.distance_from_prot = distance_diff
-	if distance_diff >= 1000:
+	if distance_diff >= ghost.visibility:
 		ghost.next_position = ghost.initial_position
 	if distance_diff < 60.0:
 		ghost.damaging = true
 	
 
 func _on_back_pressed():
-	$"body/environment".playing = false
+	get_tree().paused = true
+	$"body/controls".visible = false
+	$"body/pause_screen/paused_text".text = "Paused"
+	$"body/pause_screen".visible = true
+
+
+func _on_return_button_pressed():
+	get_tree().paused = false
+	$"body/controls".visible = true
+	$"body/pause_screen".visible = false
+
+
+func _on_menu_button_pressed():
+	get_tree().paused = false
+	$"body/controls".visible = true
+	$"body/pause_screen".visible = false
 	get_tree().change_scene("res://Scenes/menu.tscn")
-
-func _on_Area2D_body_entered(body):
-	if body is KinematicBody2D:
-		$"Navigation2D/bhost".chasing = true
-
-func _on_Area2D_body_exited(body):
-	if body is KinematicBody2D:
-		$"Navigation2D/bhost".chasing = false
-
-
-func _on_Area2D2_body_entered(body):
-	if body is KinematicBody2D:
-		$"Navigation2D2/bhost".chasing = true
-
-
-func _on_Area2D2_body_exited(body):
-	if body is KinematicBody2D:
-		$"Navigation2D2/bhost".chasing = false
-
-
-func _on_Area2D3_body_entered(body):
-	if body is KinematicBody2D:
-		$"Navigation2D3/bhost".chasing = true
-
-
-func _on_Area2D3_body_exited(body):
-	if body is KinematicBody2D:
-		$"Navigation2D3/bhost".chasing = false
+	
+func dead():
+	get_tree().paused = true
+	$"body/controls".visible = false
+	$"body/pause_screen/return_button".visible = false
+	$"body/pause_screen/paused_text".text = "Game Over"
+	$"body/pause_screen".visible = true

@@ -3,6 +3,7 @@ extends Control
 var scene_load
 
 func _ready():
+	$"gold_sprite/AnimationPlayer".play("rotate")
 	if !OS.has_virtual_keyboard():
 		$"startgame".grab_focus()
 
