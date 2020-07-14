@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scenes/dyn_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/customize.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Resources/Objects/arrow.png" type="Texture" id=4]
 [ext_resource path="res://Resources/Objects/joystick_base.png" type="Texture" id=5]
 [ext_resource path="res://Resources/Icons/prot1_icon.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/select_audio.tscn" type="PackedScene" id=7]
 
 [node name="customize" type="Control"]
 anchor_right = 1.0
@@ -138,6 +139,8 @@ align = 1
 valign = 1
 
 [node name="FadeIn" parent="." instance=ExtResource( 3 )]
+
+[node name="select" parent="." instance=ExtResource( 7 )]
 [connection signal="pressed" from="controller_settings/dpad" to="." method="_on_dpad_pressed"]
 [connection signal="pressed" from="controller_settings/cpad" to="." method="_on_cpad_pressed"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]

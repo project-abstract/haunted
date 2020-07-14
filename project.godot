@@ -28,6 +28,10 @@ Global="*res://Scripts/global.gd"
 
 window/stretch/mode="viewport"
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [rendering]
 
 environment/default_clear_color=Color( 0.160784, 0.184314, 0.231373, 1 )

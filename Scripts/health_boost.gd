@@ -30,6 +30,7 @@ func _process(delta):
 			self.position = Vector2(x, y)
 			if Global.HP > Global.hp_max:
 				Global.HP = Global.hp_max
+			get_parent().get_parent().get_node("body").update_health()
 	elif "TileMap" in str($"health_area".get_overlapping_bodies()):
 		randomize()
 		var x = rand_range(-1512, 3328)

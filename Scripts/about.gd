@@ -5,6 +5,7 @@ func _ready():
 
 
 func _on_back_pressed():
+	$"select".play()
 	$"FadeIn".visible = true
 	$"FadeIn".fade_in()
 

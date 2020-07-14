@@ -7,6 +7,7 @@ onready var nav_2d3 = $"Navigation2D3"
 onready var prota = $"body/prota"
 onready var pressed = true
 onready var time_again = 0
+onready var menu_path = "res://Scenes/menu.tscn"
 
 func _ready():
 	Global.hp_max = 100
@@ -15,6 +16,12 @@ func _ready():
 	$"body/HP_tween_bar".max_value = Global.hp_max
 	$"body/HP_rapid".value = Global.HP
 	$"body/HP_tween_bar".value = Global.HP
+	
+	if !OS.has_touchscreen_ui_hint():
+		$"body/controls/dpad/accept".visible = false 
+		$"body/controls/dpad/home".visible = false
+		$"body/controls/circlepad/accept".visible = false 
+		$"body/controls/circlepad/home".visible = false
 	
 	$"body/environment".play()
 	$"exit_sign1/Light2D/AnimationPlayer".play("light_blink")
@@ -55,6 +62,42 @@ func _process(delta):
 	$"Navigation2D2/bhost".path = new_path2
 	$"Navigation2D3/bhost".path = new_path3
 	change_music()
+	update_key()
+	
+func update_key():
+	var red = Global.red_key
+	var blue = Global.blue_key
+	var green = Global.green_key
+	var count = 0
+	if red and !blue and !green:
+		get_node("body/collected_item/key1").visible = true
+		count = 1
+	elif !red and blue and !green:
+		get_node("body/collected_item/key2").visible = true
+		count = 1
+	elif !red and !blue and green:
+		get_node("body/collected_item/key3").visible = true
+		count = 1
+	elif !red and blue and green:
+		get_node("body/collected_item/key2").visible = true
+		get_node("body/collected_item/key3").visible = true
+		count = 2
+	elif red and blue and !green:
+		get_node("body/collected_item/key1").visible = true
+		get_node("body/collected_item/key2").visible = true
+		count = 2
+	elif red and !blue and green:
+		get_node("body/collected_item/key1").visible = true
+		get_node("body/collected_item/key3").visible = true
+		count = 2
+	elif red and blue and green:
+		get_node("body/collected_item/key1").visible = true
+		get_node("body/collected_item/key2").visible = true
+		get_node("body/collected_item/key3").visible = true
+		count = 3
+	else:
+		 count = 0
+	Global.key_counts = count
 
 func check_if_one_is_chasing():
 	if $"Navigation2D/bhost".next_position != $"Navigation2D/bhost".initial_position:
@@ -121,6 +164,7 @@ func check_distance(ghost):
 	
 
 func _on_back_pressed():
+	$"body/select".play()
 	get_tree().paused = true
 	$"body/controls".visible = false
 	$"body/pause_screen/paused_text".text = "Paused"
@@ -128,20 +172,24 @@ func _on_back_pressed():
 
 
 func _on_return_button_pressed():
+	$"body/select".play()
 	get_tree().paused = false
 	$"body/controls".visible = true
 	$"body/pause_screen".visible = false
 
 
 func _on_menu_button_pressed():
+	$"body/select".play()
 	get_tree().paused = false
 	$"body/controls".visible = true
 	$"body/pause_screen".visible = false
-	get_tree().change_scene("res://Scenes/menu.tscn")
+	get_tree().change_scene(menu_path)
 	
 func dead():
+	menu_path = "res://Scenes/score_screen.tscn"
 	get_tree().paused = true
 	$"body/controls".visible = false
 	$"body/pause_screen/return_button".visible = false
 	$"body/pause_screen/paused_text".text = "Game Over"
+	$"body/pause_screen/menu_button/Label".text = "Score"
 	$"body/pause_screen".visible = true

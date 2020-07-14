@@ -12,6 +12,7 @@ func _ready():
 
 
 func _on_back_pressed():
+	$"select".play()
 	$"FadeIn".visible = true
 	$"FadeIn".fade_in()
 
@@ -21,8 +22,10 @@ func _on_FadeIn_fade_finished():
 
 
 func _on_dpad_pressed():
+	$"select".play()
 	Global.cpad = false
 
 
 func _on_cpad_pressed():
+	$"select".play()
 	Global.cpad = true

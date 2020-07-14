@@ -4,9 +4,11 @@ var scene_load
 
 func _ready():
 	$"gold_sprite/AnimationPlayer".play("rotate")
+	$"gold_sprite/Label".text = str(Global.total_gold) + " Gold"
 	if !OS.has_virtual_keyboard():
 		$"startgame".grab_focus()
-
+	
+	
 func _process(delta):
 	pass
 
