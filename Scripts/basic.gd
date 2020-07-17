@@ -16,6 +16,7 @@ func _ready():
 	$"body/HP_tween_bar".max_value = Global.hp_max
 	$"body/HP_rapid".value = Global.HP
 	$"body/HP_tween_bar".value = Global.HP
+	$"body/prota".texture = load("res://Resources/Prot/hero_"+str(Global.prot_index)+".png")
 	
 	if !OS.has_touchscreen_ui_hint():
 		$"body/controls/dpad/accept".visible = false 

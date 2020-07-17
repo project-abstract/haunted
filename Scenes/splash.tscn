@@ -1,0 +1,292 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Scripts/splash.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Icons/abstract_logo.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/fade_out.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/dyn_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Scripts/splash_ghosts.gd" type="Script" id=5]
+[ext_resource path="res://Resources/Prot/bhost.png" type="Texture" id=6]
+[ext_resource path="res://Scenes/FadeIn.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "ghost_movement"
+length = 6.0
+step = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("ghost_red:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1248, -0.25, 0, 0.25, 0, 1080, -0.25, 0, 0.25, 0, 1016, -0.25, 0, 0.25, 0, 800, -0.25, 0, 0.25, 0, 704, -0.25, 0, 0.25, 0, 592, -0.25, 0, 0.25, 0, 520, -0.25, 0, 0.25, 0, 432, -0.25, 0, 0.25, 0, 344, -0.25, 0, 0.25, 0, 512, -0.25, 0, 0.25, 0, 688, -0.25, 0, 0.25, 0, -240, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("ghost_red:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 320, -0.25, 0, 0.25, 0, 240, -0.25, 0, 0.25, 0, 320, -0.25, 0, 0.25, 0, 480, -0.25, 0, 0.25, 0, 360, -0.25, 0, 0.25, 0, 304, -0.25, 0, 0.25, 0, 344, -0.25, 0, 0.25, 0, 304, -0.25, 0, 0.25, 0, 360, -0.25, 0, 0.25, 0, 136, -0.25, 0, 0.25, 0, 352, -0.25, 0, 0.25, 0, 352, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("ghost_blue:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1120, -0.25, 0, 0.25, 0, 784, -0.25, 0, 0.25, 0, 672, -0.25, 0, 0.25, 0, 280, -0.25, 0, 0.25, 0, 320, -0.25, 0, 0.25, 0, 512, -0.25, 0, 0.25, 0, 688, -0.25, 0, 0.25, 0, 592, -0.25, 0, 0.25, 0, 512, -0.25, 0, 0.25, 0, 432, -0.25, 0, 0.25, 0, 336, -0.25, 0, 0.25, 0, -576, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("ghost_blue:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 480, -0.25, 0, 0.25, 0, 584, -0.25, 0, 0.25, 0, 428, -0.25, 0, 0.25, 0, 272, -0.25, 0, 0.25, 0, 360, -0.25, 0, 0.25, 0, 136, -0.25, 0, 0.25, 0, 360, -0.25, 0, 0.25, 0, 302, -0.25, 0, 0.25, 0, 344, -0.25, 0, 0.25, 0, 304, -0.25, 0, 0.25, 0, 360, -0.25, 0, 0.25, 0, 352, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("ghost_green:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 1376, -0.25, 0, 0.25, 0, 1128, -0.25, 0, 0.25, 0, 712, -0.25, 0, 0.25, 0, 712, -0.25, 0, 0.25, 0, 512, -0.25, 0, 0.25, 0, 688, -0.25, 0, 0.25, 0, 592, -0.25, 0, 0.25, 0, 512, -0.25, 0, 0.25, 0, 432, -0.25, 0, 0.25, 0, 336, -0.25, 0, 0.25, 0, 504, -0.25, 0, 0.25, 0, -48, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("ghost_green:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 168, -0.25, 0, 0.25, 0, -40, -0.25, 0, 0.25, 0, -56, -0.25, 0, 0.25, 0, 104, -0.25, 0, 0.25, 0, 112, -0.25, 0, 0.25, 0, 360, -0.25, 0, 0.25, 0, 302, -0.25, 0, 0.25, 0, 344, -0.25, 0, 0.25, 0, 304, -0.25, 0, 0.25, 0, 360, -0.25, 0, 0.25, 0, 136, -0.25, 0, 0.25, 0, 344, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6 )
+}
+
+[sub_resource type="Animation" id=2]
+length = 2.0
+step = 2.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:color:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:color:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:color:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath(".:color:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2 )
+}
+
+[node name="splash" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bgcolor" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="logo" type="Sprite" parent="."]
+position = Vector2( 512, 300 )
+texture = ExtResource( 2 )
+
+[node name="A" type="Label" parent="."]
+margin_left = 256.0
+margin_top = 392.0
+margin_right = 296.0
+margin_bottom = 428.0
+custom_fonts/font = ExtResource( 4 )
+text = "A"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="B" type="Label" parent="."]
+margin_left = 320.0
+margin_top = 392.0
+margin_right = 360.0
+margin_bottom = 428.0
+custom_fonts/font = ExtResource( 4 )
+text = "B"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="S" type="Label" parent="."]
+margin_left = 392.0
+margin_top = 392.0
+margin_right = 432.0
+margin_bottom = 428.0
+custom_fonts/font = ExtResource( 4 )
+text = "S"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="T" type="Label" parent="."]
+margin_left = 456.0
+margin_top = 392.0
+margin_right = 496.0
+margin_bottom = 428.0
+custom_fonts/font = ExtResource( 4 )
+text = "T"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="R" type="Label" parent="."]
+margin_left = 520.0
+margin_top = 392.0
+margin_right = 560.0
+margin_bottom = 428.0
+custom_fonts/font = ExtResource( 4 )
+text = "R"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="A2" type="Label" parent="."]
+margin_left = 576.0
+margin_top = 392.0
+margin_right = 616.0
+margin_bottom = 428.0
+custom_fonts/font = ExtResource( 4 )
+text = "A"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="C" type="Label" parent="."]
+margin_left = 640.0
+margin_top = 392.0
+margin_right = 680.0
+margin_bottom = 428.0
+custom_fonts/font = ExtResource( 4 )
+text = "C"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="T2" type="Label" parent="."]
+margin_left = 704.0
+margin_top = 392.0
+margin_right = 744.0
+margin_bottom = 428.0
+custom_fonts/font = ExtResource( 4 )
+text = "T"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ghosts" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="ghost_red" type="Sprite" parent="ghosts"]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( -240, 352 )
+texture = ExtResource( 6 )
+vframes = 2
+hframes = 8
+frame = 8
+
+[node name="ghost_blue" type="Sprite" parent="ghosts"]
+modulate = Color( 0, 0, 1, 1 )
+position = Vector2( -576, 352 )
+texture = ExtResource( 6 )
+vframes = 2
+hframes = 8
+frame = 8
+
+[node name="ghost_green" type="Sprite" parent="ghosts"]
+modulate = Color( 0, 1, 0, 1 )
+position = Vector2( -48, 344 )
+texture = ExtResource( 6 )
+vframes = 2
+hframes = 8
+frame = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ghosts"]
+anims/ghost_movement = SubResource( 1 )
+
+[node name="fade_out" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="fade_out"]
+anims/fade_out = SubResource( 2 )
+
+[node name="FadeIn" parent="." instance=ExtResource( 7 )]
+
+[node name="fgcolor" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="dance_done" from="ghosts" to="." method="_on_ghosts_dance_done"]
+[connection signal="animation_finished" from="ghosts/AnimationPlayer" to="ghosts" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="fade_finished" from="fade_out" to="." method="_on_fade_out_fade_finished"]
+[connection signal="animation_finished" from="fade_out/AnimationPlayer" to="fade_out" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="fade_finished" from="FadeIn" to="." method="_on_FadeIn_fade_finished"]

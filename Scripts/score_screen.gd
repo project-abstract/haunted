@@ -16,6 +16,7 @@ func _ready():
 		collected *= 2
 	$"no_gold".text = str(collected) + " Gold"
 	Global.total_gold += collected
+	Global.save_in_file()
 
 func _on_play_again_button_pressed():
 	$"select".play()

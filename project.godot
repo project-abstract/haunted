@@ -16,8 +16,9 @@ _global_script_class_icons={
 [application]
 
 config/name="haunted"
-run/main_scene="res://Scenes/menu.tscn"
-boot_splash/image="res://icon.png"
+run/main_scene="res://Scenes/splash.tscn"
+boot_splash/image="res://Resources/Tiles/background.png"
+boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
 
 [autoload]
@@ -27,10 +28,6 @@ Global="*res://Scripts/global.gd"
 [display]
 
 window/stretch/mode="viewport"
-
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
 
 [rendering]
 

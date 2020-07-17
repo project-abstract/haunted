@@ -2,7 +2,7 @@ extends Sprite
 
 var idx = 1
 var my_name = "battery"
-export var distraction_time = 10
+export var distraction_time = 8
 
 func _ready():
 	$"Light2D/AnimationPlayer".play("blink")

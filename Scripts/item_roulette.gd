@@ -34,7 +34,7 @@ func _ready():
 		get_node("item"+str(i+1)+"/Label2").text = str(Global.gold_collect[i]) + " Gold"
 
 func _on_FadeIn_fade_finished():
-	get_tree().change_scene("res://Scenes/basic.tscn")
+	get_tree().change_scene("res://Scenes/cutscenes.tscn")
 
 func _on_continue_button_pressed():
 	$"select".play()

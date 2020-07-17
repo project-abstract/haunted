@@ -20,7 +20,7 @@ func _ready():
 	pass # Replace with function body.
 
 func _physics_process(delta):
-	var speed = 400
+	var speed = 300
 	var velocity = Vector2(0, 0)
 	idle = false
 	if Global.cpad:
@@ -84,7 +84,7 @@ func _physics_process(delta):
 func check_for_throw(delta):
 	if feri_time_elapsed >= 10* delta:
 		feri_time_elapsed = 0
-		if (Input.is_key_pressed(KEY_C) or Input.is_action_pressed("ui_home")) and (Global.items_collected.size() > 0 and Global.items_collected.size()<=4) and get_parent().check_if_one_is_chasing():
+		if (Input.is_key_pressed(KEY_C) or Input.is_action_pressed("ui_home")) and Global.items_collected.size() > 0 and get_parent().check_if_one_is_chasing():
 			var thrown_item = get_parent().get_node(Global.realname(Global.items_collected[0])+"/"+Global.realname(Global.items_collected[0]))
 			thrown_item.get_parent().position = self.position
 			thrown_item.visible = true
@@ -105,7 +105,7 @@ func check_collection():
 		get_node("collected_item/Sprite"+str(i+1)).visible = true
 
 func check_direction(dir, delta):
-	if another_time_elapsed >= 3 * delta:
+	if another_time_elapsed >= 10 * delta:
 		another_time_elapsed = 0
 		if dir != 'n':
 			temp += 1

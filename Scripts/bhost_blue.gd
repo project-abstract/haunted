@@ -1,8 +1,8 @@
 extends Node2D
 
-var speed = 200.0
+var speed = 250.0
 var damage = 5
-var visibility = 700
+var visibility = 1000
 var distracted = false
 
 var path : = PoolVector2Array() setget set_path

@@ -23,9 +23,21 @@ func _on_FadeIn_fade_finished():
 
 func _on_dpad_pressed():
 	$"select".play()
-	Global.cpad = false
+	Global.cpad = 0
+	Global.save_in_file()
 
 
 func _on_cpad_pressed():
 	$"select".play()
-	Global.cpad = true
+	Global.cpad = 1
+	Global.save_in_file()
+
+
+func _on_prot1_pressed():
+	Global.prot_index = 1
+	Global.save_in_file()
+
+
+func _on_prot2_pressed():
+	Global.prot_index = 2
+	Global.save_in_file()

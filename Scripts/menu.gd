@@ -5,6 +5,7 @@ var scene_load
 func _ready():
 	$"gold_sprite/AnimationPlayer".play("rotate")
 	$"gold_sprite/Label".text = str(Global.total_gold) + " Gold"
+	$"info".text = "Haunted (c) 2020 v: 0. 9" + str(OS.get_name())
 	if !OS.has_virtual_keyboard():
 		$"startgame".grab_focus()
 	
@@ -13,7 +14,8 @@ func _process(delta):
 	pass
 
 func _on_quit_pressed():
-	get_tree().quit()
+	$"select".play()
+	Global.close_game()
 
 func _on_credits_pressed():
 	$"select".play()
