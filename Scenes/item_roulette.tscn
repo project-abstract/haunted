@@ -1,0 +1,253 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/dyn_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/item_roulette.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Icons/apple.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/FadeIn.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Resources/Icons/key.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/select_audio.tscn" type="PackedScene" id=6]
+
+[node name="item_roulette" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="collect_these_label" type="Label" parent="."]
+anchor_right = 1.0
+margin_top = 32.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 1 )
+text = "Collect these to obtain Gold"
+align = 1
+
+[node name="item1" type="Sprite" parent="."]
+position = Vector2( 96, 160 )
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="item1"]
+margin_left = -40.0
+margin_top = 32.0
+margin_right = 33.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 1 )
+text = "Apple"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="item1"]
+margin_left = -56.0
+margin_top = 96.0
+margin_right = 52.0
+margin_bottom = 132.0
+custom_fonts/font = ExtResource( 1 )
+text = "10 Gold"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="item2" type="Sprite" parent="."]
+position = Vector2( 296, 160 )
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="item2"]
+margin_left = -40.0
+margin_top = 32.0
+margin_right = 33.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 1 )
+text = "Apple"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="item2"]
+margin_left = -56.0
+margin_top = 96.0
+margin_right = 52.0
+margin_bottom = 132.0
+custom_fonts/font = ExtResource( 1 )
+text = "10 Gold"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="item3" type="Sprite" parent="."]
+position = Vector2( 496, 160 )
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="item3"]
+margin_left = -40.0
+margin_top = 32.0
+margin_right = 33.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 1 )
+text = "Apple"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="item3"]
+margin_left = -56.0
+margin_top = 96.0
+margin_right = 52.0
+margin_bottom = 132.0
+custom_fonts/font = ExtResource( 1 )
+text = "10 Gold"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="item4" type="Sprite" parent="."]
+position = Vector2( 696, 160 )
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="item4"]
+margin_left = -40.0
+margin_top = 32.0
+margin_right = 33.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 1 )
+text = "Apple"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="item4"]
+margin_left = -56.0
+margin_top = 96.0
+margin_right = 52.0
+margin_bottom = 132.0
+custom_fonts/font = ExtResource( 1 )
+text = "10 Gold"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="item5" type="Sprite" parent="."]
+position = Vector2( 896, 160 )
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="item5"]
+margin_left = -40.0
+margin_top = 32.0
+margin_right = 33.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 1 )
+text = "Apple"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="item5"]
+margin_left = -56.0
+margin_top = 96.0
+margin_right = 52.0
+margin_bottom = 132.0
+custom_fonts/font = ExtResource( 1 )
+text = "10 Gold"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="red_key" type="Sprite" parent="."]
+modulate = Color( 1, 0, 0, 1 )
+position = Vector2( 144, 432 )
+texture = ExtResource( 5 )
+
+[node name="blue_key" type="Sprite" parent="."]
+modulate = Color( 0, 0, 1, 1 )
+position = Vector2( 512, 432 )
+texture = ExtResource( 5 )
+
+[node name="green_key" type="Sprite" parent="."]
+modulate = Color( 0, 1, 0, 1 )
+position = Vector2( 880, 432 )
+texture = ExtResource( 5 )
+
+[node name="red_key_label" type="Label" parent="."]
+margin_left = 112.0
+margin_top = 472.0
+margin_right = 213.0
+margin_bottom = 508.0
+custom_fonts/font = ExtResource( 1 )
+text = "Red Key"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="blue_key_label" type="Label" parent="."]
+margin_left = 464.0
+margin_top = 472.0
+margin_right = 565.0
+margin_bottom = 508.0
+custom_fonts/font = ExtResource( 1 )
+text = "Blue Key"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="green_key_label" type="Label" parent="."]
+margin_left = 832.0
+margin_top = 472.0
+margin_right = 965.0
+margin_bottom = 508.0
+custom_fonts/font = ExtResource( 1 )
+text = "Green Key"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="and_also" type="Label" parent="."]
+margin_left = 80.0
+margin_top = 360.0
+margin_right = 952.0
+margin_bottom = 396.0
+custom_fonts/font = ExtResource( 1 )
+text = "Collect these three keys and reach the exit points to complete the game."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="continue_button" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -64.0
+margin_top = -56.0
+margin_right = 64.0
+margin_bottom = -24.0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="continue_button"]
+margin_right = 128.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 1 )
+text = "Continue"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FadeIn" parent="." instance=ExtResource( 4 )]
+
+[node name="select" parent="." instance=ExtResource( 6 )]
+[connection signal="pressed" from="continue_button" to="." method="_on_continue_button_pressed"]
+[connection signal="fade_finished" from="FadeIn" to="." method="_on_FadeIn_fade_finished"]

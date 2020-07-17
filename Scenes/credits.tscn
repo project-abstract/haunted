@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/dyn_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/about.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/FadeIn.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/select_audio.tscn" type="PackedScene" id=4]
 
 [node name="credits" type="Control"]
 anchor_right = 1.0
@@ -45,30 +46,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="about" type="Label" parent="."]
-margin_left = 80.0
-margin_top = 96.0
-margin_right = 960.0
-margin_bottom = 584.0
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 72.0
+margin_top = 256.0
+margin_right = 952.0
+margin_bottom = 576.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 857.0
+margin_bottom = 387.0
+
+[node name="about" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_right = 857.0
+margin_bottom = 387.0
 custom_fonts/font = ExtResource( 1 )
-text = "Haunted is created by Me and thanks to the continuous testing and support of my family and friends and also to Godot community for providing this robust engine.
-
-
-
+text = "
+Haunted is created by Me and thanks to the continuous testing 
+and support of my family and friends and also to Godot community for 
+providing this robust engine.
 
 Licenced Under:
-
 MIT License
 
 Copyright (c) 2020 Project : Abstract
 "
 align = 3
-autowrap = true
-clip_text = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+valign = 3
 
 [node name="FadeIn" parent="." instance=ExtResource( 3 )]
+
+[node name="select" parent="." instance=ExtResource( 4 )]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
 [connection signal="fade_finished" from="FadeIn" to="." method="_on_FadeIn_fade_finished"]

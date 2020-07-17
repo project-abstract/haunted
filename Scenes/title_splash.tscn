@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Resources/Prot/icon_a_animation.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/title_splash.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "logo"
+length = 5.0
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.57, 1.18, 1.84, 4.38, 4.56, 4.58, 4.59, 4.66 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( 1, 0 ), Vector2( 0, 0 ), Vector2( 1, 0 ), Vector2( 0, 0 ), Vector2( 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2, 2.5, 3, 3.5, 4, 4.5, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 0.535156, 0.480469 ), Vector2( 0.535156, 0.480469 ), Vector2( 0.535156, 0.480469 ), Vector2( 0.535156, 0.480469 ), Vector2( 0.535156, 0.480469 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2, 2.5, 3, 3.5, 4, 4.5, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 520, 280 ), Vector2( 520, 280 ), Vector2( 520, 280 ), Vector2( 520, 280 ), Vector2( 271, 125 ), Vector2( 271, 125 ), Vector2( 271, 125 ), Vector2( 271, 125 ), Vector2( 271, 125 ) ]
+}
+
+[node name="title_splash" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bgcolor" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="haunted" type="Sprite" parent="."]
+position = Vector2( 520, 280 )
+texture = ExtResource( 1 )
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="haunted"]
+anims/logo = SubResource( 1 )
+[connection signal="animation_finished" from="haunted/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

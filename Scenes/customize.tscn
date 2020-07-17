@@ -1,11 +1,19 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/dyn_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/customize.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/FadeIn.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Resources/Objects/arrow.png" type="Texture" id=4]
 [ext_resource path="res://Resources/Objects/joystick_base.png" type="Texture" id=5]
-[ext_resource path="res://Resources/Icons/prot1_icon.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Fonts/GeosansLight.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Scenes/select_audio.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Resources/Icons/hero1_icon.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Icons/hero2_icon.png" type="Texture" id=9]
+
+[sub_resource type="DynamicFont" id=1]
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 6 )
 
 [node name="customize" type="Control"]
 anchor_right = 1.0
@@ -62,9 +70,9 @@ __meta__ = {
 
 [node name="dpad" type="Button" parent="controller_settings"]
 margin_left = 704.0
-margin_top = 192.0
+margin_top = 136.0
 margin_right = 768.0
-margin_bottom = 256.0
+margin_bottom = 200.0
 rect_scale = Vector2( 2, 2 )
 flat = true
 __meta__ = {
@@ -81,11 +89,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label" type="Label" parent="controller_settings/dpad"]
+margin_left = 72.0
+margin_top = 4.0
+margin_right = 144.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 1 )
+text = "Direction"
+align = 1
+valign = 1
+
 [node name="cpad" type="Button" parent="controller_settings"]
 margin_left = 704.0
-margin_top = 384.0
+margin_top = 256.0
 margin_right = 768.0
-margin_bottom = 448.0
+margin_bottom = 320.0
 rect_scale = Vector2( 2, 2 )
 flat = true
 __meta__ = {
@@ -100,13 +118,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label" type="Label" parent="controller_settings/cpad"]
+margin_left = 72.0
+margin_top = 12.0
+margin_right = 144.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 1 )
+text = "Circle"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="player_settings" type="Node2D" parent="."]
 
 [node name="prot1" type="Button" parent="player_settings"]
-margin_left = 192.0
-margin_top = 192.0
-margin_right = 256.0
-margin_bottom = 276.0
+margin_left = 64.0
+margin_top = 128.0
+margin_right = 128.0
+margin_bottom = 212.0
 rect_scale = Vector2( 2, 2 )
 flat = true
 __meta__ = {
@@ -116,7 +147,26 @@ __meta__ = {
 [node name="TextureRect" type="TextureRect" parent="player_settings/prot1"]
 margin_right = 64.0
 margin_bottom = 64.0
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="prot2" type="Button" parent="player_settings"]
+margin_left = 256.0
+margin_top = 128.0
+margin_right = 320.0
+margin_bottom = 212.0
+rect_scale = Vector2( 2, 2 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="player_settings/prot2"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -138,7 +188,11 @@ align = 1
 valign = 1
 
 [node name="FadeIn" parent="." instance=ExtResource( 3 )]
+
+[node name="select" parent="." instance=ExtResource( 7 )]
 [connection signal="pressed" from="controller_settings/dpad" to="." method="_on_dpad_pressed"]
 [connection signal="pressed" from="controller_settings/cpad" to="." method="_on_cpad_pressed"]
+[connection signal="pressed" from="player_settings/prot1" to="." method="_on_prot1_pressed"]
+[connection signal="pressed" from="player_settings/prot2" to="." method="_on_prot2_pressed"]
 [connection signal="pressed" from="back" to="." method="_on_back_pressed"]
 [connection signal="fade_finished" from="FadeIn" to="." method="_on_FadeIn_fade_finished"]

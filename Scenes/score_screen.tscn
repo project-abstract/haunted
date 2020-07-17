@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/dyn_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Resources/Prot/gold_coin.png" type="Texture" id=2]
+[ext_resource path="res://Scripts/score_screen.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/FadeIn.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/select_audio.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "rotate"
+loop = true
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.66 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[node name="score_screen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="your_score_label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -64.0
+margin_top = 32.0
+margin_right = 76.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 1 )
+text = "Your Score:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="no_gold" type="Label" parent="."]
+margin_left = 320.0
+margin_top = 200.0
+margin_right = 360.0
+margin_bottom = 236.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 1 )
+text = "0 Gold"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="gold" type="Sprite" parent="."]
+position = Vector2( 616, 232 )
+texture = ExtResource( 2 )
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="gold"]
+anims/rotate = SubResource( 1 )
+
+[node name="play_again_button" type="Button" parent="."]
+margin_left = 192.0
+margin_top = 448.0
+margin_right = 320.0
+margin_bottom = 512.0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="play_again_button"]
+margin_right = 128.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 1 )
+text = "Play again"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="go_to_menu_button" type="Button" parent="."]
+margin_left = 704.0
+margin_top = 448.0
+margin_right = 832.0
+margin_bottom = 512.0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="go_to_menu_button"]
+margin_right = 128.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 1 )
+text = "Menu"
+align = 1
+valign = 1
+
+[node name="FadeIn" parent="." instance=ExtResource( 4 )]
+
+[node name="select" parent="." instance=ExtResource( 5 )]
+[connection signal="pressed" from="play_again_button" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="go_to_menu_button" to="." method="_on_go_to_menu_button_pressed"]
+[connection signal="fade_finished" from="FadeIn" to="." method="_on_FadeIn_fade_finished"]

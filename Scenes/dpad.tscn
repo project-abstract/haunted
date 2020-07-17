@@ -1,8 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Resources/Objects/arrow.png" type="Texture" id=1]
+[ext_resource path="res://Resources/Objects/accept_button.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Objects/accept_home.png" type="Texture" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=2]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=3]
 light_mode = 1
 
 [node name="dpad" type="Node2D"]
@@ -45,3 +53,19 @@ scale = Vector2( 0.133333, 0.133333 )
 normal = ExtResource( 1 )
 action = "ui_right"
 visibility_mode = 1
+
+[node name="accept" type="TouchScreenButton" parent="."]
+modulate = Color( 0.458824, 0.415686, 0.415686, 1 )
+material = SubResource( 2 )
+position = Vector2( 24, -416 )
+scale = Vector2( 0.2, 0.2 )
+normal = ExtResource( 2 )
+action = "ui_accept"
+
+[node name="home" type="TouchScreenButton" parent="."]
+modulate = Color( 0.458824, 0.415686, 0.415686, 1 )
+material = SubResource( 3 )
+position = Vector2( 80, -504 )
+scale = Vector2( 0.133, 0.133 )
+normal = ExtResource( 3 )
+action = "ui_home"
